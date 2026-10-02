@@ -6,6 +6,13 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import AppSidebar from "#/components/layout/app-sidebar";
+import Header from "#/components/layout/header";
+import {
+	SidebarInset,
+	SidebarProvider,
+	SidebarTrigger,
+} from "#/components/ui/sidebar";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
@@ -47,7 +54,15 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body className="font-sans antialiased">
-				{children}
+				<SidebarProvider>
+					<AppSidebar />
+					<SidebarInset>
+						<main className="p-4">
+							<Header />
+							{children}
+						</main>
+					</SidebarInset>
+				</SidebarProvider>
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",
